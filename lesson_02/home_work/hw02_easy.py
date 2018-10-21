@@ -42,7 +42,7 @@ for fruit in list:
         print('{}. {:>8}'.format(i, fruit))
         i = i + 1
 
-print("_"*25, "\n")
+print("Задача 1 решена", "_"*25, "\n")
 
 
 # Задача-2:
@@ -74,7 +74,7 @@ for elem in list1:
         spisok.append(elem)
 
 print("Результирующий список = ", spisok)
-print("_"*25, "\n")
+print("Задача 2 решена", "_"*25, "\n")
 
 # Задача-3:
 # Дан произвольный список из целых чисел.
@@ -102,4 +102,4 @@ for elem in list3:
         i += 1
 
 print("Новый список: ", list4)
-print("_"*25, "\n")
+print("Задача 3 решена", "_"*25, "\n")
