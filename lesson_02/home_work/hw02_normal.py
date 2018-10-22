@@ -75,13 +75,13 @@ print("Задача 3 решена", "_"*25, "\n")
 # б) элементы исходного списка, которые не имеют повторений:
 # например, lst = [1 , 2, 4, 5, 6, 2, 5, 2], нужно получить lst2 = [1, 4, 6]
 
-n = int(input("Введите желаемое количество элементов в списке: "))
-list3 = []
+#n = int(input("Введите желаемое количество элементов в списке: "))
+list3 = [1, 2, 4, 5, 6, 2, 5, 2]
 list4 = []
 list5 = []
 
-for elem in range(n):
-    list3.append(random.randint(0, 10))
+"""for elem in range(n):
+    list3.append(random.randint(0, 10))"""
 
 print("Исходный список: ", list3)
 
@@ -93,10 +93,14 @@ for elem in list3:
 print("Неповторяющиеся элементы исходного списка: ", list4)
 
 #б) элементы исходного списка, которые не имеют повторений:
-"""for elem in list3:
-    if elem not in list3:
-        list5.append(elem)"""
 
+print("Исходный список: ", list3)
+
+list5 = []
+for elem in list3:
+    element = list3.index(elem)
+    if elem not in list3[element + 1:]:
+        list5.append(elem)
 print("Элементы исходного списка, которые не имеют повторений: ", list5)
 print("Задача 4 решена", "_"*25, "\n")
 
