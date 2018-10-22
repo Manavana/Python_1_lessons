@@ -12,6 +12,17 @@ __author__ = "Стиврина Мария"
 equation = 'y = -12x + 11111140.2121'
 x = 2.5
 
+x_ind = equation.index("x")
+equal = equation.index("=")
+plus =equation.index("+")
+start = equal + 2
+end = x_ind
+
+k = int(equation[start:end])
+b = float(equation[plus + 2:])
+
+# print(x_ind, equal, plus, k, b)
+
 print('y = {}'.format(k * x + b))
 print("Задача 1 решена", "_"*25, "\n")
 
