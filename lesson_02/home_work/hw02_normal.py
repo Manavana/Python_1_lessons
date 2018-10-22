@@ -57,7 +57,6 @@ print("Задача 2 решена", "_"*25, "\n")
 # для получения случайного числа используйте функцию randint() модуля random
 
 import random
-import math
 
 n = int(input("Введите желаемое количество элементов в списке: "))
 list = []
@@ -81,7 +80,7 @@ list4 = []
 list5 = []
 
 """for elem in range(n):
-    list3.append(random.randint(0, 10))"""
+    list3.append(random.randint(0, 10))""" # если захочу сама собирать список, а не брать готовый из условия задачи
 
 print("Исходный список: ", list3)
 
