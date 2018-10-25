@@ -13,22 +13,24 @@ print("Задача 1 решена", "_"*25, "\n")
 
 import random
 
-lst = []
-
 n = int(input("Введите желаемое количество элементов в списке: "))
 
-for elem in range(n):
-    lst.append(random.randint(0, 10))
+def sorting(num):
+    lst = []
+    for elem in range(n):
+        lst.append(random.randint(0, 10))
 
-print("Исходный список: ", lst)
+    print("Исходный список: ", lst)
 
-i = 1
-while i < len(lst):
-     for el in range(len(lst) - i):
-          if lst[el] > lst[el + 1]:
-               lst[el], lst[el + 1] = lst[el + 1], lst[el]
-     i += 1
-print("Отсортированный список: ", lst)
+    i = 1
+    while i < len(lst):
+         for el in range(len(lst) - i):
+              if lst[el] > lst[el + 1]:
+                   lst[el], lst[el + 1] = lst[el + 1], lst[el]
+         i += 1
+    print("Отсортированный список: ", lst)
+
+sorting(n)
 print("Задача 2 решена", "_"*25, "\n")
 
 # Задача-3:
