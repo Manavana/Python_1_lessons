@@ -6,40 +6,35 @@ __author__ = "Стиврина Мария"
 # Округление должно происходить по математическим правилам (0.6 --> 1, 0.4 --> 0).
 # Для решения задачи не используйте встроенные функции и функции из модуля math.
 
-"""def rounding(num, sym):
+def rounding(num, sym):
     lst = []
+    decimal_part = []
+    int_part = []
+    elem = 0
     for el in num:
         lst.append(el)
     for el in lst:
-        elem = lst.index(el)
-        if elem is ".":
+        if el is ".":
+            elem = lst.index(".")
+            int_part = lst[:elem + 1]
             decimal_part = lst[elem + 1:]
-            #decimal_part = decimal_part[::-1]
-            for el in decimal_part:
-                if int(el) >= 5:
-                    pass
-                else:
-                    pass"""
-            #return decimal_part
+            if int(decimal_part[sym]) >= 5:
+                decimal_part[sym - 1] = str(int(decimal_part[sym - 1]) + 1)
+                if decimal_part[sym - 1] == "10":
+                    decimal_part[sym - 2] = str(int(decimal_part[sym - 2]) + 1)
+                    decimal_part[sym - 1] = str(int(decimal_part[sym - 1]) % 10)
+                for el in decimal_part[:sym]:
+                    int_part.append(el)
+                return int_part
+            else:
+                for el in decimal_part[:sym]:
+                    int_part.append(el)
+                return int_part
 
-
-number = float(input("Введите округляемое число: "))
+number = input("Введите округляемое число: ")
 symbol = int(input("До какого знака после запятой необходимо округлить? "))
 
-decimal_part = []
-
-for el in range(number):
-    decimal_part.append(el)
-
-new_decimal_part = decimal_part[:]
-
-for el in new_decimal_part:
-    elem = new_decimal_part.index(el)
-    if elem is ".":
-        new_decimal_part = new_decimal_part[elem + 1:]
-        break
-
-print("Полученное число: ", decimal_part, type(decimal_part))
+print("Полученное число: ", rounding(number, symbol))
 
 print("Задача 1 решена", "_"*25, "\n")
 
