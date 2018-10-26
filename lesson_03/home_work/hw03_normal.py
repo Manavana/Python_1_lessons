@@ -4,6 +4,22 @@ __author__ = "Стиврина Мария"
 # Напишите функцию, возвращающую ряд Фибоначчи с n-элемента до m-элемента.
 # Первыми элементами ряда считать цифры 1 1
 
+def fibonacci(x, y):
+    fibonacci = [0, 1, 1]
+    i = 3
+    while len(fibonacci) <= y:
+        fibonacci.append(fibonacci[i - 1] + fibonacci[i - 2])
+        i += 1
+    return fibonacci[x:y + 1]
+
+n = int(input("Введите элемент, от которого необходимо вывести ряд Фибоначчи: "))
+m = int(input("Введите элемент, до которого необходимо вывести ряд Фибоначчи: "))
+
+if n < m:
+    print("Полученный ряд Фибоначчи: ", fibonacci(n, m))
+else:
+    print("Некорректно введен диапазон выводимых элементов")
+
 print("Задача 1 решена", "_"*25, "\n")
 
 # Задача-2:
@@ -34,6 +50,35 @@ print("Задача 2 решена", "_"*25, "\n")
 # Задача-3:
 # Напишите собственную реализацию стандартной функции filter.
 # Разумеется, внутри нельзя использовать саму функцию filter.
+
+def my_filter(func, list):
+    lst = []
+    if func == 1:
+        for el in list:
+            if el > 5:
+                lst.append(el)
+        return lst
+    elif func == 2:
+        for el in list:
+            if el < 0:
+                lst.append(el)
+        return lst
+    else:
+        return list
+
+import random
+
+list1 = []
+n = int(input("Введите желаемое количество элементов в списке: "))
+for el in range(n):
+    list1.append(random.randint(-10, 10))
+
+m = int(input("Какой функцией Вы хотели бы отфильтровать элементы списка? Нажмите 1 если x > 5, нажмите 2 если x < 0 "))
+
+if m == 1 or m == 2:
+    print("Отфильтрованный список: ", my_filter(m, list1))
+else:
+    print("Я такой функции не знаю. Держите исходный список: ", list1)
 
 print("Задача 3 решена", "_"*25, "\n")
 
