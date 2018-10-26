@@ -23,15 +23,21 @@ __author__ = "Стиврина Мария"
             #return decimal_part
 
 
-number = input("Введите округляемое число: ")
+number = float(input("Введите округляемое число: "))
 symbol = int(input("До какого знака после запятой необходимо округлить? "))
 
-decimal_part = ""
+decimal_part = []
 
-for el in number:
-    elem = number.index(el)
+for el in range(number):
+    decimal_part.append(el)
+
+new_decimal_part = decimal_part[:]
+
+for el in new_decimal_part:
+    elem = new_decimal_part.index(el)
     if elem is ".":
-        decimal_part = number[elem + 1:]
+        new_decimal_part = new_decimal_part[elem + 1:]
+        break
 
 print("Полученное число: ", decimal_part, type(decimal_part))
 
