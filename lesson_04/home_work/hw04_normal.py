@@ -36,13 +36,34 @@ pttrn = "[a-z]{2}([A-Z]+)[A-Z]{2}"
 print("Способ 1: с помощью re - ", re.findall(pttrn, str1))
 
 # способ 2: без re
-"""lst2 = []
-for el in range(3, len(str) - 3):
-    if """
+low_reg = 0
+up_reg = 0
 
+"""for el in str1:
+    if el.islower():
+        low_reg += 1
+        if low_reg == 2 and 
+    else:
+        up_reg += 1"""
+up_reg_list = []
+str_1 = str1[3:]
+print(str_1)
+for el in range(len(str_1)):
+    if str_1[el].islower():
+        low_reg += 1
+        """if low_reg >= 2 and up_reg >= 3:
+            up_reg_list.append(str_1[el])
+            low_reg = 0
+            up_reg = 0"""
+    else:
+        up_reg += 1
+        if low_reg >= 2 and up_reg == 4:
+            up_reg_list.append(str_1[el - 3])
+            up_reg_list.append(str_1[el - 2])
+            low_reg = 0
+            up_reg = 0
 
-
-print("Способ 2: без re - ", )
+print("Способ 2: без re - ", up_reg_list)
 
 print("Задача 2 решена", "_"*25, "\n")
 
@@ -55,9 +76,13 @@ print("Задача 2 решена", "_"*25, "\n")
 import os
 import random
 
-"""path = os.path.join("home_work", "number.txt")
-with open(path, 'w', encoding = 'UTF-8') as f:
-    print(f.readlines())"""
+"""lst2 = [random.randint(0, 2) for _ in range(10)]
+str2 = list(map(str, lst2))
+print(str2)
+str3 = "".join(i for i in str2)
+print(str3) <------ Для тестирования алгоритма нахождения наибольшей последовательности на меньшей выборке чисел для 
+большей наглядности"""
+
 lst2 = [random.randint(0, 9) for _ in range(2500)]
 str2 = list(map(str, lst2))
 print(str2)
@@ -67,5 +92,34 @@ print(str3)
 file = open("number.txt", "w")
 file.write(str3)
 file.close()
+
+with open("number.txt", 'r', encoding = 'UTF-8') as file:
+    line = (file.read())
+
+num = ""
+num_max = ""
+j = 1
+jmax = 0
+
+for el in range(len(line) - 1):
+    if line[el] == line[el + 1]:
+        num = line[el]
+        j += 1
+        if jmax < j:
+            jmax = j
+            num_max = num
+    else:
+        if jmax < j:
+            jmax = j
+            num_max = num
+            j = 1
+            num = ""
+        else:
+            j = 1
+
+if jmax == 1:
+    print("Повторяющихся цифр в процессе чтения файла не попадалось")
+else:
+    print("Самая длинная последовательность состоит из {} одинаковых цифр, повторяющееся число {}".format(jmax, num_max))
 
 print("Задача 3 решена", "_"*25, "\n")
