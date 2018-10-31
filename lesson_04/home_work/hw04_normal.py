@@ -59,7 +59,7 @@ for el in range(len(str1)):
         up_reg += 1
         perem = 0
 
-print("Способ 2: без re - ", str_1
+print("Способ 2: без re - ", str_1)
 
 #print("Задача 2 решена", "_"*25, "\n")
 
@@ -72,6 +72,7 @@ print("Способ 2: без re - ", str_1
 
 import os
 import random
+import re
 
 """lst2 = [random.randint(0, 2) for _ in range(10)]
 str2 = list(map(str, lst2))
@@ -118,5 +119,8 @@ if jmax == 1:
     print("Повторяющихся цифр в процессе чтения файла не попадалось")
 else:
     print("Самая длинная последовательность состоит из {} одинаковых цифр, повторяющееся число {}".format(jmax, num_max))
+
+reg = re.findall(r"(0{2,}|1{2,}|2{2,}|3{2,}|4{2,}|5{2,}|6{2,}|7{2,}|8{2,}|9{2,})", line)
+print(reg)
 
 print("Задача 3 решена", "_"*25, "\n")
