@@ -38,56 +38,30 @@ print("Способ 1: с помощью re - ", re.findall(pttrn, str1))
 # способ 2: без re
 low_reg = 0
 up_reg = 0
+str_1 = []
+perem = 0
 
-"""for el in str1:
-    if el.islower():
-        low_reg += 1
-        if low_reg == 2 and 
-    else:
-        up_reg += 1"""
-"""up_reg_list = []
-str_1 = str1[3:]
-print(str_1)
-for el in range(len(str_1)):
-    if str_1[el].islower():
-        low_reg += 1
-        if low_reg >= 2 and up_reg >= 3:
-            up_reg_list.append(str_1[el])
+for el in range(len(str1)):
+    if str1[el].islower():
+        if low_reg >= 2 and up_reg >=3:
+            str_1.append(str1[el - up_reg:el - 2])
             low_reg = 0
             up_reg = 0
-   else:
-        up_reg += 1
-        if low_reg >= 2 and up_reg == 4:
-            up_reg_list.append(str_1[el - 3])
-            up_reg_list.append(str_1[el - 2])
+            perem = 1
+        elif perem == 0:
             low_reg = 0
-            up_reg = 0"""
-
-new_list2 =[]
-flag = 0
-l = 0
-b = 0
-for index in range(len(str1)):
-    if str1[index].islower():
-        if l >= 2 and b >=3:
-            new_list2.append(str1[index-b:index-2])
-            l = 0
-            b = 0
-            flag = 1
-        elif flag == 0:
-            l = 0
-            b = 0
-            flag = 1
+            up_reg = 0
+            perem = 1
         else:
             pass
-        l = l + 1
+        low_reg += 1
     else:
-        b = b + 1
-        flag = 0
+        up_reg += 1
+        perem = 0
 
-print("Способ 2: без re - ", new_list2)
+print("Способ 2: без re - ", str_1
 
-print("Задача 2 решена", "_"*25, "\n")
+#print("Задача 2 решена", "_"*25, "\n")
 
 # Задание-3:
 # Напишите скрипт, заполняющий указанный файл (самостоятельно задайте имя файла)
@@ -95,6 +69,7 @@ print("Задача 2 решена", "_"*25, "\n")
 # 2500-значное произвольное число.
 # Найдите и выведите самую длинную последовательность одинаковых цифр
 # в вышезаполненном файле.
+
 import os
 import random
 
