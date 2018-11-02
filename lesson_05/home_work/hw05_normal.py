@@ -17,21 +17,57 @@ __author__ = "Стиврина Мария"
 # и импортированные в данный файл из easy.py
 
 import easy
+import os
+import sys
 
 effect = 1
+delete = ""
+create = ""
+trans = ""
 
+print("\n")
+print("Здравствуйте!")
 while effect != 0:
-    print("Здравствуйте! Выберете в меню действие, которое необходимо совершить: \n")
+    print("\n")
+    print("Выберете в меню действие, которое необходимо совершить: \n")
     print("1. Перейти в папку")
     print("2. Просмотреть содержимое текущей папки")
     print("3. Удалить папку")
     print("4. Создать папку")
     print("0. Завершить работу")
     print("\n")
-    effect = input(">>> ")
-    effect = int(effect)
+    effect = int(input(">>> "))
 
-
+    if effect == 1:
+        print("Введите название папки, в которую необходимо перейти: ")
+        trans = input(">>>")
+        easy.transition_dir(trans)
+        """if easy.transition_dir(trans) == True:
+            print("Успешно перешел")
+        else:
+            print("Невозможно перейти в папку. Возможно такой не существует")"""
+    elif effect == 2:
+        print("Содержимое текущей папки: ", easy.show_dir())
+    elif effect == 3:
+        print("Введите название удаляемой папки: ")
+        delete = input(">>>")
+        easy.delete_dir(delete)
+        """if easy.delete_dir(delete) == True:
+            print("Удаление прошло успешно")
+        else:
+            print("Невозможно удалить папку. Возможно такой не существует")"""
+    elif effect == 4:
+        print("Введите название создаваемой папки: ")
+        create = input(">>>")
+        easy.make_dir(create)
+        """if easy.make_dir(create) == True:
+            print("Папка успешно создана")
+        else:
+            print("Невозможно создать папку. Возможно такая уже существует")"""
+    elif effect == 0:
+        print("До новых встреч!")
+    else:
+        print("Такого действия в меню нет")
 
 
 
