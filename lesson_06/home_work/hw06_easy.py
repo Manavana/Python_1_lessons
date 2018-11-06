@@ -63,16 +63,32 @@ class Trapezium(Triangle):
         side4 = math.sqrt((self.x1 - self.x4) ** 2 + (self.y1 - self.y4) ** 2)
         return side4
 
+    def ravno_trap(self):
+        a = trapezium.side4_length()
+        c = trapezium.side1_length()
+        b = trapezium.side2_length()
+        e = trapezium.side3_length()
+        d1 = math.sqrt(c ** 2 + a * b)
+        d2 = math.sqrt(e ** 2 + a * b)
+        return bool(d1 == d2)
+
     def perimeter(self):
-        perimeter_of_the_figure = trapezium.side1_length() + trapezium.side2_length() + trapezium.side3_length()
-        + trapezium.side4_length()
+        perimeter_of_the_figure = trapezium.side1_length() + trapezium.side2_length() + trapezium.side3_length() +\
+        trapezium.side4_length()
         return perimeter_of_the_figure
 
     def area(self):
-        p = triangle.perimeter() / 2
-        figure_area = math.sqrt(p * (p - triangle.side1_length()) * (p - triangle.side2_length()) * (p -
-        triangle.side3_length()))
+        a = trapezium.side4_length()
+        c = trapezium.side1_length()
+        b = trapezium.side2_length()
+        figure_area =((a + b) / 4) * math.sqrt(4 * (c **2) - (a - b) ** 2)
         return figure_area
 
-trapezium = Trapezium(1, 2, 3, 4, 5, 6, 7, 8)
+trapezium = Trapezium(-7, -3, -4, 3, 2, 3, 5, -3)
+print("Длина стороны №1: ", trapezium.side1_length())
+print("Длина стороны №2: ", trapezium.side2_length())
+print("Длина стороны №3: ", trapezium.side3_length())
+print("Длина стороны №4: ", trapezium.side4_length())
 print("Периметр трапеции: ", trapezium.perimeter())
+print("Площадь трапеции: ", trapezium.area())
+print("Эта трапеция является равнобедренной: ", trapezium.ravno_trap())
