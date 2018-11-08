@@ -59,3 +59,42 @@ __author__ = "Стиврина Мария"
 модуль random: http://docs.python.org/3/library/random.html
 
 """
+
+import random
+
+class Card:
+    def __init__(self):
+        self.card = []
+
+    def make_card(self):
+        intermediate_list = []
+
+        # Прописываю в первом цикле for генерацию значений для карточки больше 15 + отбираю неповторяющиеся
+        for el in range(20):
+            element = random.randint(1, 90)
+            if element not in intermediate_list:
+                intermediate_list.append(element)
+
+        # отбираю нужное количество неповторяющихся значений для карточки
+        self.card = random.sample(intermediate_list, 15)
+        self.line1 = self.card[:5]
+        self.line1.sort()
+        self.line2 = self.card[5:10]
+        self.line2.sort()
+        self.line3 = self.card[10:]
+        self.line3.sort()
+
+    def __str__(self):
+        return """{}  {}  {}  {}  {}
+{}  {}  {}  {}  {}
+{}  {}  {}  {}  {}""".format(self.line1[0], self.line1[1], self.line1[2], self.line1[3], self.line1[4],
+                             self.line2[0], self.line2[1], self.line2[2], self.line2[3], self.line2[4],
+                             self.line3[0], self.line3[1], self.line3[2], self.line3[3], self.line3[4])
+
+my_card = Card()
+my_card.make_card()
+
+computer_card = Card()
+computer_card.make_card()
+
+print(my_card)
