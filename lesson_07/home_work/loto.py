@@ -89,17 +89,39 @@ class Card:
         return len(self.card)
 
     def __str__(self):
-        return """{}  {}  {}  {}  {}
-{}  {}  {}  {}  {}
-{}  {}  {}  {}  {}""".format(self.line1[0], self.line1[1], self.line1[2], self.line1[3], self.line1[4],
-                             self.line2[0], self.line2[1], self.line2[2], self.line2[3], self.line2[4],
-                             self.line3[0], self.line3[1], self.line3[2], self.line3[3], self.line3[4])
+        return """{}  {}  {}  {}  {}  {}  {}  {}  {}
+{}  {}  {}  {}  {}  {}  {}  {}  {}
+{}  {}  {}  {}  {}  {}  {}  {}  {}""".format("  ", self.line1[0], self.line1[1], "  ", "  ", self.line1[2],
+                                             self.line1[3], "  ", self.line1[4],
+                                             self.line2[0], "  ", self.line2[1], self.line2[2], "  ", self.line2[3],
+                                             "  ", self.line2[4],
+                                             "  ", "  ", self.line3[0], self.line3[1], self.line3[2], "  ", "  ",
+                                             self.line3[3], self.line3[4], "  ")
 
     def compare_numbers(self, number):
         for num in self.card:
             if num == number:
                 return True
         return False
+
+    def cross_out_numbers(self, number):
+        for num in self.card:
+            if num == number:
+                self.card.pop(self.card.index(number))
+        for num in self.line1:
+            if num == number:
+                self.line1[self.line1.index(number)] = "--"
+                break
+            else:
+                for num in self.line2:
+                    if num == number:
+                        self.line2[self.line2.index(number)] = "--"
+                        break
+                    else:
+                        for num in self.line3:
+                            if num == number:
+                                self.line3[self.line3.index(number)] = "--"
+                                break
 
 class Barrel:
     def __init__(self):
@@ -130,14 +152,6 @@ bag_with_barrel = Barrel()
 bag_with_barrel.shuffle_bag()
 
 while my_card.get_len_card() > 0 and computer_card.get_len_card() > 0:
-    if my_card.get_len_card() == 0:
-        print("$$$ Поздравляем! Вы выиграли джекпот! $$$")
-        break
-
-    if computer_card.get_len_card() == 0:
-        print("Сегодня не Ваш день...")
-        break
-
     number = bag_with_barrel.get_barrel()
 
     print("\n------ Моя карточка ------")
@@ -150,7 +164,17 @@ while my_card.get_len_card() > 0 and computer_card.get_len_card() > 0:
 
     answer = input("Зачеркнуть цифру? (y/n)")
 
+    if computer_card.compare_numbers(number) == True:
+        computer_card.cross_out_numbers(number)
+        if computer_card.get_len_card() == 0:
+            print("Сегодня не Ваш день...")
+            break
+
     if my_card.compare_numbers(number) == True and answer == "y":
+        my_card.cross_out_numbers(number)
+        if my_card.get_len_card() == 0:
+            print("$$$ Поздравляем! Вы выиграли джекпот! $$$")
+            break
         continue
     elif my_card.compare_numbers(number) == True and answer == "n":
         print("Вы ошиблись. Такая цифра есть у Вас в карточке. К сожалению, игра окончена")
