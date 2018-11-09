@@ -71,7 +71,7 @@ class Card:
 
         # Прописываю в первом цикле for генерацию значений для карточки больше 15 + отбираю неповторяющиеся
         for el in range(20):
-            element = random.randint(1, 91)
+            element = random.randint(1, 90)
             if element not in intermediate_list:
                 intermediate_list.append(element)
 
@@ -116,8 +116,7 @@ class Barrel:
         self.barrel = random.choice(self.barrel_in_bag)
         # скинули его в другой мешок
         self.barrel_dropped.append(self.barrel)
-        index_barrel = self.barrel_in_bag.index(self.barrel)
-        self.barrel_in_bag.pop(index_barrel)
+        self.barrel_in_bag.pop(self.barrel_in_bag.index(self.barrel))
         print("\nНовый бочонок: ", self.barrel, "(осталось {})".format(len(self.barrel_in_bag)))
         return self.barrel
 
