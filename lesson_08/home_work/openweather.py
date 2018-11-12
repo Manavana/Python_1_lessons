@@ -133,48 +133,43 @@ city = input("Введите название города на английск
 with open("app.id", encoding="UTF-8") as f:
     app_id = f.read().split()
 my_app_id = app_id[10]
-print(my_app_id)
+print("APP_ID: ", my_app_id)
 
 # получаем веб-страницу
 api_url = "http://api.openweathermap.org/data/2.5/weather?"
 #  формируем словарик с нашими входными данными
 data_list = {"q": city, "appid": my_app_id, "units": "metric"}
-# передаем параметры в api_url
+# передаем параметры в api_url для извлечения данных
 inquiry = requests.get(api_url, params = data_list)
+# преобразовываем данные из json формата
 data = inquiry.json()
 
+print("Полученные данные: ", data)
+print(f"Температура в городе {data['name']} сейчас {data['main']['temp']} градус(ов) по Цельсию.")
 
-"""команда data = inquiry.json()
-даст нам привычный нам словарь
-и из него можем получить новые данные
-сори, необходимые данные
-и полученные данные уже записываем в базу
-
-
-
+# записываем необходимые данные в переменную weather
+weather = [(data['id'], data['name'], data['dt'], data['main']['temp'], data['weather'][0]['id'])]
 
 # создаем базу с именем 'город'.db
 connect = sqlite3.connect("{}.db".format(city))
 cursor = connect.cursor()
 
-# остается записать данные в таблицу
-# то выполняем запрос на создание таблицы
-cursor.execute('''CREATE TABLE weather (id_города INTEGER PRIMARY KEY, Город VARCHAR(255), Дата DATE, Температура 
+# проверяем, существует ли такая БД, если существует, то обновляем, если нет, то создаем
+try:
+    cursor.execute('''CREATE TABLE weather (id_города INTEGER PRIMARY KEY, Город VARCHAR(255), Дата DATE, Температура
 INTEGER, id_погоды INTEGER)''')
+    print("База данных погоды в городе {} создана".format(city))
+    cursor.executemany("INSERT INTO weather VALUES (?, ?, ?, ?, ?)", weather)
+except:
+    cursor.execute("""REPLACE INTO weather (id_города, Город, Дата, Температура, id_погоды) VALUES (?, ?, ?, ?, 
+    ?)""", (data["sys"]["id"], city, data["dt"], data["main"]["temp"], data["main"]["temp"]))
+    print("База данных погоды в городе {} обновлена".format(city))
 
-weather = [(), (), (), "здесь должен быть список!!!!!!!!"]
-
-# вставляем множество данных в таблицу используя безопасный метод "?"
-cursor.executemany("INSERT INTO weather VALUES (?, ?, ?, ?, ?)", weather)
+# записываем все данные в БД
 connect.commit()
 
-
-# получаем результат сделанного запроса
-results = cursor.fetchall()
-
-
-
-connect.close()"""
+cursor.close()
+connect.close()
 
 
 
